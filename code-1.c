@@ -1,8 +1,12 @@
 #include <stdio.h>
 
-/*@null@*/ /*@out@*/ static char* foo() {
+/*@null@*/ static char* foo() {
     char *p = (char*) malloc(12*sizeof(char));
-    return p;
+    if(p != NULL) {
+    	*p = 'M';
+    	return p;
+    }
+    return NULL;
 }
 
 int main () {
@@ -17,7 +21,7 @@ int main () {
     else
         p = foo();
 
-    if(x !=0 && p!= 0) {
+    if(x !=0 && p!= NULL) {
         s=*p;
         free(p);
     }
